@@ -16,11 +16,12 @@
 在函数内部，有两个特殊的对象:arguments 和 this， arguments是一个类数组对象,包含着传入函数中的所有参数.这个对象还有一个callee属性,该属性是一个指针,指向拥有这个 arguments 对象的函数,他可应用在递归上
 ```
 function factorial(num){
-    if (num <=1) {
-        return 1;
-    } else {
-        return num * arguments.callee(num-1)
-} }
+  if (num <=1) {
+      return 1;
+  } else {
+      return num * arguments.callee(num-1)
+  }   
+}
 ```
 this 引用的是函数据以执行的环境对象
 
