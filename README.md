@@ -45,8 +45,8 @@ caller 这个属性中保存着调用当前函数的函数的引用
 ```
 var person = {};
 Object.defineProperty(person, "name", {
-    writable: false,
-    value: "Nicholas"
+  writable: false,
+  value: "Nicholas"
 });
 alert(person.name); //"Nicholas"
 person.name = "Greg"; 
@@ -61,19 +61,19 @@ alert(person.name); //"Nicholas"
 - \[[Set]]:在写入属性时调用的函数。默认值为 undefined
 ```
 var book = {
-    _year: 2004,
-    edition: 1 
+  _year: 2004,
+  edition: 1 
 };
 Object.defineProperty(book, "year", {
-    get: function(){
-        return this._year;
-    },
-    set: function(newValue){
-        if (newValue > 2004) {
-            this._year = newValue;
-            this.edition += newValue - 2004;
-        }
-    }
+  get: function(){
+      return this._year;
+  },
+  set: function(newValue){
+      if (newValue > 2004) {
+          this._year = newValue;
+          this.edition += newValue - 2004;
+      }
+  }
 });
 book.year = 2005; 
 alert(book.edition);
@@ -375,10 +375,10 @@ document.body.appendChild(script);
 var socket = new WebSocket("ws://www.example.com/server.php");
 ```
 实例化了 WebSocket 对象后，浏览器就会马上尝试创建连接。与 XHR 类似，WebSocket 也有一个表示当前状态的 readyState 属性。不过，这个属性的值与 XHR 并不相同，而是如下所示。
-WebSocket.OPENING (0):正在建立连接。 
-WebSocket.OPEN (1):已经建立连接。 
-WebSocket.CLOSING (2):正在关闭连接。 
-WebSocket.CLOSE (3):已经关闭连接
+- WebSocket.OPENING (0):正在建立连接。 
+- WebSocket.OPEN (1):已经建立连接。 
+- WebSocket.CLOSING (2):正在关闭连接。 
+- WebSocket.CLOSE (3):已经关闭连接
 
 2、发送和接收数据
 ```
@@ -395,6 +395,6 @@ socekt.onmessage = function(e) {
 ```
 3、其他事件
 WebSocket 对象还有其他三个事件，在连接生命周期的不同阶段触发。
-open:在成功建立连接时触发。
-error:在发生错误时触发，连接不能持续。
-close:在连接关闭时触发。
+- open:在成功建立连接时触发。
+- error:在发生错误时触发，连接不能持续。
+- close:在连接关闭时触发。
