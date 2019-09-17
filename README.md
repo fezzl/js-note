@@ -79,10 +79,10 @@ book.year = 2005;
 alert(book.edition);
 ```
 new 操作符做了什么
-1.创建一个新的对象
-2.把构造函数的作用域指向这个新的对象,this指向这个新的对象
-3.执行构造函数的代码
-4.返回新的对象
+- 创建一个新的对象
+- 把构造函数的作用域指向这个新的对象,this指向这个新的对象
+- 执行构造函数的代码
+- 返回新的对象
 
 #### 原型模式
 - 每个函数都有一个 prototype(原型)属性，这个属性是一个指针，指向一个对象，而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法
@@ -94,16 +94,16 @@ new 操作符做了什么
 - 如果你想要得到所有实例属性，无论它是否可枚举，都可以使用 `Object.getOwnPropertyNames()` 方法。
 
 #### 继承
-##### 原型链继承(缺点: 继承父类的引用类型会造成数据的共享)
+#### 原型链继承(缺点: 继承父类的引用类型会造成数据的共享)
 通过实现原型链，本质上是扩展原型搜索机制。当以读取模式访问一个实例属性时，首先会在实例中搜索该属性。如果没有找到该属性，则会继续搜索实例的原型。在通过原型链实现继承的情况下，搜索过程就得以沿着原型链继续向上
 确定原型和实例的关系
 - 使用`instanceof`来测试实例与原型链中出现过的构造函数，结果会返回true
 - 使用`isPrototypeOf()`,只要是原型链中出现过的原型,都可以说是该原型链所派生的实例的原型
 
-##### 构造函数继承(缺点: 父类中原型上的属性和方法子类继承不到)
+#### 构造函数继承(缺点: 父类中原型上的属性和方法子类继承不到)
 在子类的构造函数中调用父类的构造函数，并且可以把参数传给父类，为了确保父类的构造函数不会重写子类型的属性，可以在调用父类构造函数后，再添加子类型的属性
 
-##### 组合继承(缺点: 父类型调用了两次)
+#### 组合继承(缺点: 父类型调用了两次)
 使用原型链实现对原型属性的方法的继承，而通过借用构造函数来实现对实例属性的继承。这样既通过在原型上定义方法实现了函数复用，又能保证每个实例都有它自己的属性
 ```
 function SuperType(name){
@@ -347,8 +347,8 @@ User-Agent:浏览器的用户代理字符串
 调用 XHR 对象的 `getResponseHeader()`方法并传入头部字段名称，可以取得相应的响应头部信息。而调用 `getAllResponseHeaders()`方法则可以取得一个包含所有头部信息的长字符串。
 
 #### 跨域——同源策略(协议、域名、端口号不一致)限制
-1、CORS(跨源资源共享)，使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或相应是应该成功，还是失败。
-2、JSONP(由回调函数和数据组成),缺点: 不安全, 难以确定请求是否成功, 只能发送get请求
+- CORS(跨源资源共享)，使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或相应是应该成功，还是失败。
+- JSONP(由回调函数和数据组成),缺点: 不安全, 难以确定请求是否成功, 只能发送get请求
 JSONP 是通过动态`<script>`元素来使用的，使用时可以为src 属性指定一个跨域 URL。这里的`<script>`元素与`<img>`元素类似，都有能力不受限制地从其他域 加载资源。因为 JSONP 是有效的 JavaScript 代码，所以在请求完成后，即在 JSONP 响应加载到页面中 以后，就会立即执行
 ```
 function handleResponse(response){
@@ -360,17 +360,17 @@ script.src = "http://freegeoip.net/json/?callback=handleResponse";
 document.body.appendChild(script);
 ```
 #### Comet——服务器推送
-1、长轮询，页面发起一个请求到服务器，然后服务器一直保持连接打开，直到有数据发送。发送完数据之后，浏览器关闭连接，随即又发起一个发到服务器的新请求(短轮询: 浏览器定时向服务器发送请求,看看有没有更新的数据)
-2、HTTP流，浏览器向服务器发送一个请求，而服务器保持连接打开，然后周期性地向浏览器发送数据
+- 长轮询，页面发起一个请求到服务器，然后服务器一直保持连接打开，直到有数据发送。发送完数据之后，浏览器关闭连接，随即又发起一个发到服务器的新请求(短轮询: 浏览器定时向服务器发送请求,看看有没有更新的数据)
+- HTTP流，浏览器向服务器发送一个请求，而服务器保持连接打开，然后周期性地向浏览器发送数据
 
 #### Web Sockets——是在一个单独的持久连接上提供全双工、双向通信
-由于 Web Sockets 使用了自定义的协议，所以 URL 模式也略有不同。未加密的连接不再是 http://， 而是 ws://;加密的连接也不是 https://，而是 wss://。在使用 Web Socket URL 时，必须带着这个 模式，因为将来还有可能支持其他模式。
+由于 Web Sockets 使用了自定义的协议，所以 URL 模式也略有不同。未加密的连接不再是 http://， 而是 ws://;加密的连接也不是 https://，而是 wss://。在使用 Web Socket URL 时，必须带着这个模式，因为将来还有可能支持其他模式。
 优点: 能够在客户端和服务端之间发送非常少量的数据，而不必担心HTTP那样字节级的开销。由于传递的数据包很小，因此非常适合移动应用
 缺点: 制定协议的时间比制定JavaScript API的时间还要长
 
 #### 使用Web Sockets(不受同源策略限制)
 
-1、实例化WebSocket对象并传入要连接的URL
+##### 实例化WebSocket对象并传入要连接的URL
 ```
 var socket = new WebSocket("ws://www.example.com/server.php");
 ```
@@ -380,7 +380,7 @@ var socket = new WebSocket("ws://www.example.com/server.php");
 - WebSocket.CLOSING (2):正在关闭连接。 
 - WebSocket.CLOSE (3):已经关闭连接
 
-2、发送和接收数据
+##### 发送和接收数据
 ```
 var socket = new WebSocket("ws://www.example.com/server.php");
 socket.send("Hello World!");
@@ -393,8 +393,50 @@ socekt.onmessage = function(e) {
   // 处理数据
 }
 ```
-3、其他事件
+##### 其他事件
 WebSocket 对象还有其他三个事件，在连接生命周期的不同阶段触发。
 - open:在成功建立连接时触发。
 - error:在发生错误时触发，连接不能持续。
 - close:在连接关闭时触发。
+
+### 二十二、高级技巧
+
+#### 函数柯里化
+```
+function curry(fn) {
+  var args = Array.prototype.slice.apply(arguments, 1);
+  return function () {
+    var innerArgs = Array.prototype.slice.apply(arguments);
+    var totalArgs = args.concat(innerArgs);
+    return fn.apply(null, args);
+  }
+}
+function add(num1,num2){
+  return num1+num2;
+}
+var curried = curry(add, 3);
+console.log(curried(5)); // 8
+```
+#### 不可扩展对象
+`Object.preventExtensions()`方法可以改变这个行为，让你不能再给对象添加属性和方法。
+
+#### 密封的对象
+密封对象不可扩展，而 且已有成员的\[[Configurable]]特性将被设置为 false。这就意味着不能删除属性和方法，因为不能使用 `Object.defineProperty()`把数据属性修改为访问器属性，或者相反,属性值可以修改
+要密封对象，可以使用 `Object.seal()`方法
+
+#### 冻结的对象
+冻结的对象既不可扩展，又是密封的，而且对象数据属性的 \[[Writable]] 特性会被设置为 false。如果定义 \[[Set]] 函数，访问器属性仍然是可写的。 ECMAScript 5 定义的` Object.freeze()`方法可以用来冻结对象。
+
+#### `setTimeout()`和`setInterval()`: 在指定的时间间隔后把函数添加到队列中
+`setTimeout()`: 指定的时间间隔表示何时将定时器的代码添加到队列，而不是实际执行代码，如果onclick事件处理程序的执行时间大于定时器的间隔时间，那么定时器的代码会在事件处理程序执行完之后才执行，会造成定时器的代码执行间隔长于指定的时间间隔
+
+`setInterval()`: 1、某些间隔会被跳过 2、多个定时器的代码执行之间的间隔可能会比预期的小
+避免: 可以递归调用`setTimeout()`实现`setInterval()`
+```
+setTimeout(function(){
+  //处理中
+  setTimeout(arguments.callee, interval);
+}, interval);
+```
+
+### 二十三、离线应用与客户端存储
