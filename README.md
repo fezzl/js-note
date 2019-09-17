@@ -2,17 +2,16 @@
 
 ### 五、引用类型
 
-数组
+#### 数组
 `instanceof` 的问题
 它假定只有一个全局环境,如果在网页中包含多个框架的话，那实际上就存在多个全局环境，如果从一个全局环境中传一个数组到另一个全局环境，传入的数组的构造函数与这个函数原生的构造函数不同。
 `Array.isArray`不管在哪个环境都可以判断是否是数组
 
----
 
-正则
+#### 正则
 元字符必须转义，元字符包括`( [ { \ ^ $ | ) ? * + .]}`
 
-函数
+#### 函数
 在函数内部，有两个特殊的对象:arguments 和 this， arguments是一个类数组对象,包含着传入函数中的所有参数.这个对象还有一个callee属性,该属性是一个指针,指向拥有这个 arguments 对象的函数,他可应用在递归上
 ```
 function factorial(num){
@@ -270,14 +269,14 @@ window -> document -> html -> body -> element
 #### DOM0级事件
 每个元素(包括 window 和 document)都有自己的事件处理程序属性，这些属性通常全部小写， 例如 onclick。将这种属性的值设置为一个函数，就可以指定事件处理程序
 
-#### DOM2级事件——可以添加多个事件处理程序
+#### DOM2级事件 —— 可以添加多个事件处理程序
 DOM2 级事件定义了两个方法，用于处理指定和删除事件处理程序的操作:addEventListener() 和 removeEventListener()。所有 DOM 节点中都包含这两个方法，并且它们都接受 3 个参数:要处理的事件名、作为事件处理程序的函数和一个布尔值。最后这个布尔值参数如果是 true，表示在捕获阶段调用事件处理程序;如果是 false，表示在冒泡阶段调用事件处理程序
 
 ### 二十、JSON
 JSON是一种数据格式，不是一种编程语言
 JSON对象有两个方法: stringify()和parse(),这两个方法分别用于把JavaScript对象序列化为JSON字符串和把JSON字符串解析为原生JavaScript值
 
-### 二十一、Ajax——无须刷新页面即可从服务器取得数据
+### 二十一、Ajax —— 无须刷新页面即可从服务器取得数据
 核心: XMLHttpRequest对象(XHR)
 ```
 var xhr = new XMLHttpRequest()
@@ -346,7 +345,7 @@ User-Agent:浏览器的用户代理字符串
 要成功发送请求头部信息，必须在调用 `open()`方法之后且调用 `send()`方法 之前调用 `setRequestHeader()`
 调用 XHR 对象的 `getResponseHeader()`方法并传入头部字段名称，可以取得相应的响应头部信息。而调用 `getAllResponseHeaders()`方法则可以取得一个包含所有头部信息的长字符串。
 
-#### 跨域——同源策略(协议、域名、端口号不一致)限制
+#### 跨域 —— 同源策略(协议、域名、端口号不一致)限制
 - CORS(跨源资源共享)，使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或相应是应该成功，还是失败。
 - JSONP(由回调函数和数据组成),缺点: 不安全, 难以确定请求是否成功, 只能发送get请求
 JSONP 是通过动态`<script>`元素来使用的，使用时可以为src 属性指定一个跨域 URL。这里的`<script>`元素与`<img>`元素类似，都有能力不受限制地从其他域 加载资源。因为 JSONP 是有效的 JavaScript 代码，所以在请求完成后，即在 JSONP 响应加载到页面中 以后，就会立即执行
@@ -359,12 +358,12 @@ var script = document.createElement("script");
 script.src = "http://freegeoip.net/json/?callback=handleResponse"; 
 document.body.appendChild(script);
 ```
-#### Comet——服务器推送
+#### Comet —— 服务器推送
 - 长轮询，页面发起一个请求到服务器，然后服务器一直保持连接打开，直到有数据发送。发送完数据之后，浏览器关闭连接，随即又发起一个发到服务器的新请求(短轮询: 浏览器定时向服务器发送请求,看看有没有更新的数据)
 - HTTP流，浏览器向服务器发送一个请求，而服务器保持连接打开，然后周期性地向浏览器发送数据
 
-#### Web Sockets——是在一个单独的持久连接上提供全双工、双向通信
-由于 Web Sockets 使用了自定义的协议，所以 URL 模式也略有不同。未加密的连接不再是 http://， 而是 ws://;加密的连接也不是 https://，而是 wss://。在使用 Web Socket URL 时，必须带着这个模式，因为将来还有可能支持其他模式。
+#### Web Sockets —— 是在一个单独的持久连接上提供全双工、双向通信
+由于 Web Sockets 使用了自定义的协议，所以 URL 模式也略有不同。未加密的连接不再是 http://，而是 ws://;加密的连接也不是 https://，而是 wss://。在使用 Web Socket URL 时，必须带着这个模式，因为将来还有可能支持其他模式。
 优点: 能够在客户端和服务端之间发送非常少量的数据，而不必担心HTTP那样字节级的开销。由于传递的数据包很小，因此非常适合移动应用
 缺点: 制定协议的时间比制定JavaScript API的时间还要长
 
@@ -388,7 +387,7 @@ socket.send("Hello World!");
 因为 Web Sockets 只能通过连接发送纯文本数据，所以对于复杂的数据结构，在通过连接发送之前，必须进行序列化，例如把数据序列化为一个 JSON 字符串，然后再发送到服务器
 当服务器向客户端发来消息时，WebSocket 对象就会触发 message 事件。这个 message 事件与其他传递消息的协议类似，也是把返回的数据保存在 event.data 属性中
 ```
-socekt.onmessage = function(e) {
+socket.onmessage = function(e) {
   var data = e.data; // 返回的数据也是字符串
   // 处理数据
 }
@@ -440,3 +439,14 @@ setTimeout(function(){
 ```
 
 ### 二十三、离线应用与客户端存储
+
+#### Cookie —— 客户端用于存储会话信息的
+- cookie存储的大小(4k)和数量是有限制的,默认情况下浏览器关闭cookie就会消失
+- 域、路径、失效时间和 secure 标志都是服务器给浏览器的指示，以指定何时应该发送 cookie。这些参数并不会作为发送到服务器的 cookie 信息的一部分，只有名值对儿才会被发送。
+- 由于所有的 cookie 都会由浏览器作为请求头发送，所以在 cookie 中存储大量信息会影响到特定域的请求性能。cookie 信息越大，完成对服务器请求的时间也就越长。尽管浏览器对 cookie 进行了大小限制，不过最好还是尽可能在 cookie 中少存储信息，以避免影响性能
+
+#### Web Storage —— localStorage和sessionStorage(setItem(),getItem,removeItem())
+- sessionStorage(5M)
+  sessionStorage 对象存储特定于某个会话的数据，也就是该数据只保持到浏览器关闭。存储在 sessionStorage 中的数据可以跨越页面刷新而存在
+- localStorage(5M)
+  要访问同一个 localStorage 对象，页面必须来自同一个域名(子域名无效)，使用同一种协议，在同一个端口上，数据保留到通过 JavaScript 删除或者是用户清除浏览器缓存
