@@ -32,10 +32,10 @@ function throttle(func, wait) {
     let context = this;
     let args = arguments;
     if(!timeout) {
-      timeout = function() {
+      timeout = setTimeout(() => {
         timeout = null;
         func.apply(context, args);
-      }
+      }, wait)
     }
   }
 }
